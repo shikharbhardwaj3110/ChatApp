@@ -1,0 +1,46 @@
+<html>
+    <head>
+    <title>Chat App</title>
+    </head>
+
+    <body>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();  
+            
+
+            socket.on('miscmsg',(data)=>{
+                console.log(data)
+            })
+
+            sendmsg = () => {
+                var inputValue = document.getElementById("inputtext").value
+                var messages = document.getElementById("messages")
+                if(inputValue)
+                {
+                    socket.emit('chat msg',inputValue)
+                    document.getElementById("inputtext").value=""
+                    var item = document.createElement('li')
+                    item.textContent = inputValue
+                    messages.appendChild(item)
+                }
+            }
+
+            socket.on('chat msg',(data)=>{
+                var messages = document.getElementById("messages")
+                var item = document.createElement('li')
+                item.textContent = data
+                messages.appendChild(item)
+                console.log("Msg recvd from user : ",data)
+            })
+            
+            socket.on('message',(data)=>{
+            console.log(data)
+
+
+          })
+        </script>
+        <ul id="messages"></ul>
+        <input name="inputtext" id="inputtext"/><button id="button" onclick="sendmsg()">Send</button>
+    </body>
+</html>
