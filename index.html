@@ -27,14 +27,24 @@
                 return ("Sent at " + h +  ':' + m)
             }
 
-            buildCard = (message) => {
+            buildCard = (message,flag) => {
                 var card = document.createElement('div')
                 var cardContent = document.createElement('span')
                 cardContent.textContent = message
                 card.appendChild(cardContent)
                 //card.style.height = '50px'
                 //card.style.minWidth = "0px"
-                card.style.maxWidth = "100px"
+
+                //canvas = document.createElement("canvas");
+                //context = canvas.getContext("2d");
+                //context.font = message;
+                //width = context.measureText(message).width;
+                //formattedWidth = Math.ceil(width)+50
+                //console.log("Width of the text : ",formattedWidth)
+                card.style.maxWidth =  "70px"
+                if(flag)
+                card.style.marginLeft = "auto"
+
                 //card.style.display = "inline-block"
                 card.style.paddingRight = "8px"
                 card.style.paddingLeft = "5px"
@@ -58,7 +68,7 @@
                 if(inputValue)
                 {
                     socket.emit('chat msg',inputValue)
-                    var item = buildCard(inputValue)
+                    var item = buildCard(inputValue,1)
                     document.getElementById("inputtext").value=""
                     messages.appendChild(item)
                     messages.appendChild(document.createElement("br"))
@@ -67,7 +77,7 @@
 
             socket.on('chat msg',(data)=>{
                 var messages = document.getElementById("msgdiv")
-                var item = buildCard(data)
+                var item = buildCard(data,0)
                 //item.textContent = data
                 //item.setAttribute('margin','5px')
                 messages.appendChild(item)
