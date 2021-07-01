@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {margin: 0px; padding: 0px;}
-        #msgdiv {background-color: white;}
+        #msgdiv {background-color: white; padding : 10; padding-bottom: 45px;}
         #inputdiv {border: none ;flex:1; position: fixed; bottom : 0px; min-width: 100vw; display: flex;}
         #inputtext {height: 45px; width: 95%;}
         #button {height: 45px; width: 5%; border-radius: 5px; float: right; background-color :royalblue;}
@@ -31,23 +31,27 @@
                 var card = document.createElement('div')
                 var cardContent = document.createElement('span')
                 cardContent.textContent = message
+                cardContent.style.fontSize = "17px"
+                card.style.textAlign = "center"
                 card.appendChild(cardContent)
-                //card.style.height = '50px'
-                //card.style.minWidth = "0px"
-
-                //canvas = document.createElement("canvas");
-                //context = canvas.getContext("2d");
-                //context.font = message;
-                //width = context.measureText(message).width;
-                //formattedWidth = Math.ceil(width)+50
-                //console.log("Width of the text : ",formattedWidth)
-                card.style.maxWidth =  "70px"
+                
+                card.style.width =  "fit-content"
+                card.style.maxWidth = "60%"
+                card.style.borderRadius = "10px"
                 if(flag)
+                {
                 card.style.marginLeft = "auto"
-
+                //card.style.float = "right"
+              
+                }
                 //card.style.display = "inline-block"
+                //card.style.display = "inline-block"
+                card.style.paddingLeft = "8px"
                 card.style.paddingRight = "8px"
-                card.style.paddingLeft = "5px"
+                card.style.paddingBottom = "3px"
+                card.style.paddingTop = "3px"
+                //card.style.paddingRight = "8px"
+                //card.style.paddingLeft = "5px"
                 card.style.border = "1px solid black"
                 card.style.wordWrap = "break-word"
                 //card.style.marginTop = "15px"
