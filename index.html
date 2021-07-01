@@ -5,10 +5,12 @@
     <style>
         body {margin: 0px; padding: 0px;}
         #mainbar {background-color: royalblue ; position: "sticky"; top: 0;}
+        #chatstart {font-size: 18px; color : #9e9e9e;}
+        #chatstartdiv {text-align: center; padding-top: 15px;}
         #msgdiv {background-color: white; padding : 10; padding-bottom: 45px;}
         #inputdiv {border: none ;flex:1; position: fixed; bottom : 0px; display: flex; overflow : "hidden"; width: 100%;}
-        #inputtext {flex : 10; height: 45px;}
-        #button {flex : 1; border-radius: 10px; float: right; background-color :royalblue;}
+        #inputtext {flex : 10; height: 45px; border-radius: 10px; border : 1px solid gray; border-bottom: 2px solid gray;}
+        #button {flex : 1; border-radius: 10px; float: right; background-color :royalblue; border : 1px solid darkblue}
         
     </style>
     </head>
@@ -22,20 +24,32 @@
             })
                         
             
-
-            timeNow = () => {
-                var d = new Date()
-                h = (d.getHours()<10?'0':'') + d.getHours()
-                m = (d.getMinutes()<10?'0':'') + d.getMinutes()
-                return ("Sent at " + h +  ':' + m)
+            timeNow = (date) => {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            var strTime = hours + ':' + minutes + ' ' + ampm;
+            return "Sent at " + strTime;
             }
+
+            //console.log(formatAMPM(new Date));
+
+            //timeNow = () => {
+                //var d = new Date()
+               // h = (d.getHours()<10?'0':'') + d.getHours()
+             //   m = (d.getMinutes()<10?'0':'') + d.getMinutes()
+            //    return ("Sent at " + h +  ':' + m)
+            //}
 
             buildCard = (message,flag) => {
                 var card = document.createElement('div')
                 var cardContent = document.createElement('span')
                 cardContent.textContent = message
                 cardContent.style.fontSize = "17px"
-                card.style.textAlign = "center"
+                //card.style.textAlign = "center"
                 card.appendChild(cardContent)
                 
                 card.style.width =  "fit-content"
@@ -44,6 +58,8 @@
                 if(flag)
                 {
                 card.style.marginLeft = "auto"
+                //card.style.backgroundColor = "#9f97ad"
+                cardContent.style.color = "black"
                 //card.style.float = "right"
               
                 }
@@ -61,10 +77,11 @@
                 //card.style.maxHeight = "80px"
                 card.appendChild(document.createElement("br"))
                 var timeStamp = document.createElement('span')
-                timeStamp.textContent = timeNow()
+                timeStamp.textContent = timeNow(new Date)
                 timeStamp.style.fontSize = "12px"
                 timeStamp.style.display = "block"
                 timeStamp.style.marginTop = "10px"
+                timeStamp.style.color = "gray"
                 card.appendChild(timeStamp)
                 return card
             }
@@ -108,6 +125,9 @@
         <div id="maindiv"></div>
         <div id="mainbar">
             <span>NavBar</span>
+        </div>
+        <div id="chatstartdiv">
+            <span id="chatstart">Your chat starts here</span>
         </div>
         <div id="msgdiv">
         <span id="messages"></ul>
