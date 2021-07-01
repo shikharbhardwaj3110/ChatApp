@@ -4,10 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {margin: 0px; padding: 0px;}
+        #mainbar {background-color: royalblue ; position: "sticky"; top: 0;}
         #msgdiv {background-color: white; padding : 10; padding-bottom: 45px;}
-        #inputdiv {border: none ;flex:1; position: fixed; bottom : 0px; min-width: 100vw; display: flex;}
-        #inputtext {height: 45px; width: 95%;}
-        #button {height: 45px; width: 5%; border-radius: 5px; float: right; background-color :royalblue;}
+        #inputdiv {border: none ;flex:1; position: fixed; bottom : 0px; display: flex; overflow : "hidden"; width: 100%;}
+        #inputtext {flex : 10; height: 45px;}
+        #button {flex : 1; border-radius: 10px; float: right; background-color :royalblue;}
         
     </style>
     </head>
@@ -19,6 +20,8 @@
             socket.on('miscmsg',(data)=>{
                 console.log(data)
             })
+                        
+            
 
             timeNow = () => {
                 var d = new Date()
@@ -103,6 +106,9 @@
           })
         </script>
         <div id="maindiv"></div>
+        <div id="mainbar">
+            <span>NavBar</span>
+        </div>
         <div id="msgdiv">
         <span id="messages"></ul>
         </div>
