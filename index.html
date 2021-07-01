@@ -1,14 +1,20 @@
 <html>
     <head>
     <title>Chat App</title>
+    <style>
+        body {margin: 0px; padding: 0px;}
+        #msgdiv {background-color: aqua;}
+        #inputdiv {border: none ;flex:1; position: fixed; bottom : 0px; min-width: 100vw; display: flex;}
+        #inputtext {height: 45px; width: 95%;}
+        #button {height: 45px; width: 5%; border-radius: 5px; float: right; background-color :royalblue;}
+        
+    </style>
     </head>
 
     <body>
         <script src="/socket.io/socket.io.js"></script>
         <script>
             var socket = io();  
-            
-
             socket.on('miscmsg',(data)=>{
                 console.log(data)
             })
@@ -20,27 +26,44 @@
                 {
                     socket.emit('chat msg',inputValue)
                     document.getElementById("inputtext").value=""
-                    var item = document.createElement('li')
+                    var item = document.createElement('span')
                     item.textContent = inputValue
+                    item.style.display = "block"
+                    item.style.marginTop = "10px"
+                    item.style.float = "right"
                     messages.appendChild(item)
+                    messages.appendChild(document.createElement("br"))
                 }
             }
 
             socket.on('chat msg',(data)=>{
                 var messages = document.getElementById("messages")
-                var item = document.createElement('li')
+                var item = document.createElement('span')
                 item.textContent = data
+                item.setAttribute('margin','5px')
                 messages.appendChild(item)
+                messages.appendChild(document.createElement("br"))
                 console.log("Msg recvd from user : ",data)
             })
             
+            document.addEventListener('keypress',(e)=>{
+                var input = document.getElementById("inputtext")
+                if(e.key=='Enter' && input.value!=null){
+                    sendmsg()
+                }
+            })
+
             socket.on('message',(data)=>{
             console.log(data)
 
-
           })
         </script>
-        <ul id="messages"></ul>
+        <div id="maindiv"></div>
+        <div id="msgdiv">
+        <span id="messages"></ul>
+        </div>
+        <div id="inputdiv">
         <input name="inputtext" id="inputtext"/><button id="button" onclick="sendmsg()">Send</button>
+        </div>
     </body>
 </html>
