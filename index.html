@@ -1,9 +1,10 @@
 <html>
     <head>
     <title>Chat App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {margin: 0px; padding: 0px;}
-        #msgdiv {background-color: aqua;}
+        #msgdiv {background-color: white;}
         #inputdiv {border: none ;flex:1; position: fixed; bottom : 0px; min-width: 100vw; display: flex;}
         #inputtext {height: 45px; width: 95%;}
         #button {height: 45px; width: 5%; border-radius: 5px; float: right; background-color :royalblue;}
@@ -19,30 +20,59 @@
                 console.log(data)
             })
 
+            timeNow = () => {
+                var d = new Date()
+                h = (d.getHours()<10?'0':'') + d.getHours()
+                m = (d.getMinutes()<10?'0':'') + d.getMinutes()
+                return ("Sent at " + h +  ':' + m)
+            }
+
+            buildCard = (message) => {
+                var card = document.createElement('div')
+                var cardContent = document.createElement('span')
+                cardContent.textContent = message
+                card.appendChild(cardContent)
+                //card.style.height = '50px'
+                //card.style.minWidth = "0px"
+                card.style.maxWidth = "100px"
+                //card.style.display = "inline-block"
+                card.style.paddingRight = "8px"
+                card.style.paddingLeft = "5px"
+                card.style.border = "1px solid black"
+                card.style.wordWrap = "break-word"
+                //card.style.marginTop = "15px"
+                //card.style.maxHeight = "80px"
+                card.appendChild(document.createElement("br"))
+                var timeStamp = document.createElement('span')
+                timeStamp.textContent = timeNow()
+                timeStamp.style.fontSize = "12px"
+                timeStamp.style.display = "block"
+                timeStamp.style.marginTop = "10px"
+                card.appendChild(timeStamp)
+                return card
+            }
+
             sendmsg = () => {
                 var inputValue = document.getElementById("inputtext").value
-                var messages = document.getElementById("messages")
+                var messages = document.getElementById("msgdiv")
                 if(inputValue)
                 {
                     socket.emit('chat msg',inputValue)
+                    var item = buildCard(inputValue)
                     document.getElementById("inputtext").value=""
-                    var item = document.createElement('span')
-                    item.textContent = inputValue
-                    item.style.display = "block"
-                    item.style.marginTop = "10px"
-                    item.style.float = "right"
                     messages.appendChild(item)
                     messages.appendChild(document.createElement("br"))
                 }
             }
 
             socket.on('chat msg',(data)=>{
-                var messages = document.getElementById("messages")
-                var item = document.createElement('span')
-                item.textContent = data
-                item.setAttribute('margin','5px')
+                var messages = document.getElementById("msgdiv")
+                var item = buildCard(data)
+                //item.textContent = data
+                //item.setAttribute('margin','5px')
                 messages.appendChild(item)
                 messages.appendChild(document.createElement("br"))
+                window.scrollTo(0, document.body.scrollHeight);
                 console.log("Msg recvd from user : ",data)
             })
             
