@@ -1,6 +1,6 @@
 # ChatApp
 
-Technology using : 
+**Technologies used :** 
 
 1. Node.JS
 2. Socket-IO
