@@ -5,7 +5,7 @@ const io = require('socket.io')(server);
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/chatroom',(req,res)=>{
+app.get('/',(req,res)=>{
   res.sendFile(__dirname+ '/index.html')
 })
 
