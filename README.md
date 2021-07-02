@@ -1,5 +1,7 @@
 # ChatApp
 
+Yet another random chatroom application that lets you chat with random people over the internet.
+
 **Technologies used :** 
 
 1. Node.JS
