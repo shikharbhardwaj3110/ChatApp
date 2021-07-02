@@ -73,9 +73,10 @@ buildCard = (message, flag) => {
     else {
         outerCardTextDiv.style.paddingLeft = "10px"
         outerCardTextDiv.style.textAlign = "left"
+        cardContent.style.color = "white"
         card.style.backgroundColor = "royalblue"
         card.style.border = "1px solid royalblue"
-        timeStamp.style.color = "black"
+        timeStamp.style.color = "white"
         if (lastSender == "You" || lastSender == "fresh") {
             outerCardText.textContent = "Stranger"
             outerCardTextDiv.style.paddingBottom = "10px"
