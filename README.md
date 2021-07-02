@@ -2,7 +2,7 @@
 
 Yet another random chatroom application that lets you chat with random people over the internet. This app is responsive meaning it works well on mobiles and tablets as well.
 
-**Technologies used :** 
+**Technology used :** 
 
 1. Node.JS
 2. Socket-IO
