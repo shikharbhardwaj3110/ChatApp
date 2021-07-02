@@ -23,7 +23,8 @@
                 console.log(data)
             })
                         
-            
+            var lastSender = "fresh"
+
             timeNow = (date) => {
             var hours = date.getHours();
             var minutes = date.getMinutes();
@@ -35,46 +36,67 @@
             return "Sent at " + strTime;
             }
 
-            //console.log(formatAMPM(new Date));
-
-            //timeNow = () => {
-                //var d = new Date()
-               // h = (d.getHours()<10?'0':'') + d.getHours()
-             //   m = (d.getMinutes()<10?'0':'') + d.getMinutes()
-            //    return ("Sent at " + h +  ':' + m)
-            //}
-
+           
             buildCard = (message,flag) => {
+
                 var card = document.createElement('div')
                 var cardContent = document.createElement('span')
                 cardContent.textContent = message
                 cardContent.style.fontSize = "17px"
-                //card.style.textAlign = "center"
+                
                 card.appendChild(cardContent)
                 
                 card.style.width =  "fit-content"
                 card.style.maxWidth = "60%"
                 card.style.borderRadius = "10px"
+
+                
+               
+                var outerCard = document.createElement('div')
+                var outerCardText = document.createElement('span')
+                var outerCardTextDiv = document.createElement('div')
+                outerCardTextDiv.appendChild(outerCardText)
+                //outerCardTextDiv.style.border = "1px solid black"
+                //outerCardText.style.marginBottom = "10px"
+                
+                //outerCardText.textContent = "You"
+                console.log(lastSender)
+
                 if(flag)
                 {
+
+                outerCardTextDiv.style.paddingRight = "10px"
+                outerCardTextDiv.style.textAlign = "right"
                 card.style.marginLeft = "auto"
-                //card.style.backgroundColor = "#9f97ad"
+               
                 cardContent.style.color = "black"
-                //card.style.float = "right"
-              
+                //outerCardText.textContent = "You"
+                
+                if(lastSender=="fresh" || lastSender=="Stranger")
+                {
+                    outerCardTextDiv.style.paddingBottom = "10px"
+                    outerCardText.textContent = "You"
+                    lastSender = "You"
                 }
-                //card.style.display = "inline-block"
-                //card.style.display = "inline-block"
+                }
+                else{
+                    outerCardTextDiv.style.paddingLeft = "10px"
+                    outerCardTextDiv.style.textAlign = "left"
+                    if(lastSender=="You" || lastSender=="fresh"){
+                        outerCardText.textContent = "Stranger"
+                        outerCardTextDiv.style.paddingBottom = "10px"
+                    }
+                    
+                }
+                
                 card.style.paddingLeft = "8px"
                 card.style.paddingRight = "8px"
                 card.style.paddingBottom = "3px"
                 card.style.paddingTop = "3px"
-                //card.style.paddingRight = "8px"
-                //card.style.paddingLeft = "5px"
+               
                 card.style.border = "1px solid black"
                 card.style.wordWrap = "break-word"
-                //card.style.marginTop = "15px"
-                //card.style.maxHeight = "80px"
+              
                 card.appendChild(document.createElement("br"))
                 var timeStamp = document.createElement('span')
                 timeStamp.textContent = timeNow(new Date)
@@ -83,31 +105,43 @@
                 timeStamp.style.marginTop = "10px"
                 timeStamp.style.color = "gray"
                 card.appendChild(timeStamp)
-                return card
+                //outerCardText.style.marginLeft = "auto"
+                //outerCardText.style.marginRight = "0"
+                outerCard.appendChild(outerCardTextDiv)
+                outerCard.appendChild(card)
+                outerCard.style.paddingBottom = "10px"
+                //outerCard.style.border = "1px solid black"
+
+
+                return outerCard
             }
 
             sendmsg = () => {
                 var inputValue = document.getElementById("inputtext").value
                 var messages = document.getElementById("msgdiv")
+                
                 if(inputValue)
                 {
                     socket.emit('chat msg',inputValue)
                     var item = buildCard(inputValue,1)
+                    lastSender = "You"
                     document.getElementById("inputtext").value=""
                     messages.appendChild(item)
-                    messages.appendChild(document.createElement("br"))
+                    //messages.appendChild(document.createElement("br"))
                 }
             }
 
             socket.on('chat msg',(data)=>{
                 var messages = document.getElementById("msgdiv")
+                
                 var item = buildCard(data,0)
+                lastSender = "Stranger"
                 //item.textContent = data
                 //item.setAttribute('margin','5px')
                 messages.appendChild(item)
-                messages.appendChild(document.createElement("br"))
+               // messages.appendChild(document.createElement("br"))
                 window.scrollTo(0, document.body.scrollHeight);
-                console.log("Msg recvd from user : ",data)
+                //console.log("Msg recvd from user : ",data)
             })
             
             document.addEventListener('keypress',(e)=>{
