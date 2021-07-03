@@ -12,4 +12,6 @@ Yet another random chatroom application that lets you chat with random people ov
 
 Simply use **node index.js** to start up the server on your local machine and go to ***http:localhost:3000/*** from your browser to enter the chatroom.
 
+**App in action **
 
+![alt text](https://github.com/shikharbhardwaj3110/ChatApp/blob/master/public/first.PNG?raw=true)
