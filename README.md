@@ -10,7 +10,7 @@ Yet another responsive chat application that lets you chat with random people ov
 
 **How to use :**
 
-Simply use **node index.js** to start up the server on your local machine and go to ***http:localhost:3000/*** from your browser to enter the chatroom.
+Simply use **node index.js** to start up the server on your local machine and go to ***http:localhost:3000/*** from your browser to get to the landing page, choose a username for yourself and enter the chatroom.
 
 **App in action :**
 
