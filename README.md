@@ -14,6 +14,4 @@ Simply use **node index.js** to start up the server on your local machine and go
 
 **App in action :**
 
-![alt text](https://github.com/shikharbhardwaj3110/ChatApp/blob/master/public/second.PNG?raw=true)
-
-![alt text](https://github.com/shikharbhardwaj3110/ChatApp/blob/master/public/third.PNG?raw=true)
+<img src="https://github.com/shikharbhardwaj3110/ChatApp/blob/master/public/second.PNG?raw=true" align="center/>
