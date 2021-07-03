@@ -1,8 +1,22 @@
 var socket = io();
 
-socket.on('miscmsg', (data) => {
+var splitUrl = window.location.href.split("=")
+var sid = splitUrl[1]
 
-    var statusCard = makeStatusCard(data.id, data.flag)
+socket.on('connect',()=>{
+    socket.emit('verifyClient',sid)
+})
+
+socket.on('confirmClient',(data)=>{
+    if(!data)
+        window.location.assign('http://localhost:3000/')
+    else
+        console.log("Client confirmed !!")
+})
+
+socket.on('miscmsg', (data) => {
+    console.log(data)
+    var statusCard = makeStatusCard(data.id, data.conf)
     var messages = document.getElementById("msgdiv")
     messages.appendChild(statusCard)
 })
@@ -32,7 +46,7 @@ timeNow = (date) => {
     return "Sent at " + strTime;
 }
 
-buildCard = (message, flag) => {
+buildCard = (message, flag, clientName) => {
 
     var card = document.createElement('div')
     var cardContent = document.createElement('span')
@@ -64,7 +78,7 @@ buildCard = (message, flag) => {
         card.style.border = "2px solid #ebebeb"
         cardContent.style.color = "black"
         timeStamp.style.color = "gray"
-        if (lastSender == "fresh" || lastSender == "Stranger") {
+        if (lastSender!="You") {
             outerCardTextDiv.style.paddingBottom = "10px"
             outerCardText.textContent = "You"
             lastSender = "You"
@@ -77,8 +91,8 @@ buildCard = (message, flag) => {
         card.style.backgroundColor = "royalblue"
         card.style.border = "1px solid royalblue"
         timeStamp.style.color = "white"
-        if (lastSender == "You" || lastSender == "fresh") {
-            outerCardText.textContent = "Stranger"
+        if (lastSender!=clientName) {
+            outerCardText.textContent = clientName
             outerCardTextDiv.style.paddingBottom = "10px"
         }
 
@@ -108,8 +122,8 @@ sendmsg = () => {
     var messages = document.getElementById("msgdiv")
 
     if (inputValue) {
-        socket.emit('chat msg', inputValue)
-        var item = buildCard(inputValue, 1)
+        socket.emit('chat msg', {inputValue,sid})
+        var item = buildCard(inputValue, 1, "You")
         lastSender = "You"
         document.getElementById("inputtext").value = ""
         messages.appendChild(item)
@@ -118,8 +132,9 @@ sendmsg = () => {
 
 socket.on('chat msg', (data) => {
     var messages = document.getElementById("msgdiv")
-    var item = buildCard(data.data, 0)
-    lastSender = "Stranger"
+    var clientName = data.id
+    var item = buildCard(data.data, 0, clientName)
+    lastSender = clientName
     messages.appendChild(item)
     window.scrollTo(0, document.body.scrollHeight);
 })
