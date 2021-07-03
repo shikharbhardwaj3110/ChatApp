@@ -14,5 +14,7 @@ Simply use **node index.js** to start up the server on your local machine and go
 
 **App in action :**
 
-<img src="/public/second.PNG" align="center"/>
+<p align="center">
+  <img src="/public/second.PNG"/>
+</p>
 
