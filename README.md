@@ -1,6 +1,6 @@
 # ChatApp
 
-Yet another chat application that lets you chat with random people over the internet. This app is responsive meaning it works well on mobiles and tablets as well.
+Yet another responsive chat application that lets you chat with random people over the internet. Just choose a username of your choice and get chatting !
 
 **Technology used :** 
 
