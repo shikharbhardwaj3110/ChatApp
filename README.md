@@ -18,3 +18,8 @@ Simply use **node index.js** to start up the server on your local machine and go
   <img src="/public/second.PNG"/>
 </p>
 
+<br><br>
+
+<p align="center">
+  <img src="/public/third.PNG"/>
+</p>
