@@ -3,12 +3,12 @@ var socket = io();
 var splitUrl = window.location.href.split("=")
 var sid = splitUrl[1]
 
-socket.on('connect',()=>{
-    socket.emit('verifyClient',sid)
+socket.on('connect', () => {
+    socket.emit('verifyClient', sid)
 })
 
-socket.on('confirmClient',(data)=>{
-    if(!data)
+socket.on('confirmClient', (data) => {
+    if (!data)
         window.location.assign('http://localhost:3000/')
     else
         console.log("Client confirmed !!")
@@ -78,7 +78,7 @@ buildCard = (message, flag, clientName) => {
         card.style.border = "2px solid #ebebeb"
         cardContent.style.color = "black"
         timeStamp.style.color = "gray"
-        if (lastSender!="You") {
+        if (lastSender != "You") {
             outerCardTextDiv.style.paddingBottom = "10px"
             outerCardText.textContent = "You"
             lastSender = "You"
@@ -91,7 +91,7 @@ buildCard = (message, flag, clientName) => {
         card.style.backgroundColor = "royalblue"
         card.style.border = "1px solid royalblue"
         timeStamp.style.color = "white"
-        if (lastSender!=clientName) {
+        if (lastSender != clientName) {
             outerCardText.textContent = clientName
             outerCardTextDiv.style.paddingBottom = "10px"
         }
@@ -107,7 +107,7 @@ buildCard = (message, flag, clientName) => {
     card.style.wordWrap = "break-word"
 
     card.appendChild(document.createElement("br"))
-    
+
     card.appendChild(timeStamp)
     outerCardText.style.fontWeight = "bold"
     outerCard.appendChild(outerCardTextDiv)
@@ -122,7 +122,7 @@ sendmsg = () => {
     var messages = document.getElementById("msgdiv")
 
     if (inputValue) {
-        socket.emit('chat msg', {inputValue,sid})
+        socket.emit('chat msg', { inputValue, sid })
         var item = buildCard(inputValue, 1, "You")
         lastSender = "You"
         document.getElementById("inputtext").value = ""
@@ -146,7 +146,3 @@ document.addEventListener('keypress', (e) => {
     }
 })
 
-socket.on('message', (data) => {
-    console.log(data)
-
-})

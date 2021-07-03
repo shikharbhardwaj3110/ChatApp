@@ -10,8 +10,6 @@ socket.on("message", (data) => {
         console.log("Username unique !")
         window.location.assign("http://localhost:3000/chatroom?token=" + data.flag)
     }
-    else
-        console.log("Username invalid !")
 })
 
 buttonPress = () => {

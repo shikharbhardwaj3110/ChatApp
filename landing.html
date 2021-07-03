@@ -1,13 +1,31 @@
 <html>
-    <head>
-        <title>ChatApp</title>
-    </head>
-    <body>
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="/landingScript.js"></script>
-        <div>
-            <input id="username">
-            <button id="submitButton" onclick="buttonPress()">Submit</button>
+
+<head>
+    <title>ChatApp</title>
+    <link rel="stylesheet" href="/landing.css">
+</head>
+
+<body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/landingScript.js"></script>
+    <div id="maindiv">
+        <div id="innerdiv">
+            <div id="innerbox">
+                <div id="chatappdiv">
+                    <h1 id="chatapp">ChatApp</span>
+                </div>
+                <div id="questiondiv">
+                    <span id="question">What would you like to be called ?</span>
+                </div>
+                <div id="usernamediv">
+                    <input id="username">
+                </div>
+                <div id="buttondiv">
+                    <button id="submitButton" onclick="buttonPress()">Submit</button>
+                </div>
+            </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
