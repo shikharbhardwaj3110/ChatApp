@@ -15,11 +15,11 @@ Simply use **node index.js** to start up the server on your local machine and go
 **App in action :**
 
 <p align="center">
-  <img src="/public/second.PNG"/>
+  <img src="/public/app1.PNG"/>
 </p>
 
 <br><br>
 
 <p align="center">
-  <img src="/public/third.PNG"/>
+  <img src="/public/app2.PNG"/>
 </p>
